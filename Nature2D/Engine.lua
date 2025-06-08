@@ -21,7 +21,7 @@ local Globals = Mrequire(fpath.."/Constants/Globals.LEF") --require(script.Paren
 local Signal = Mrequire(fpath.."/Utilities/Signal.LEF") --require(script.Parent.Utilities.Signal)
 local Quadtree = Mrequire(fpath.."/Utilities/Quadtree.LEF") --require(script.Parent.Utilities.Quadtree)
 local Janitor = Mrequire(fpath.."/Utilities/Janitor.LEF") --require(script.Parent.Utilities.Janitor)
-local Types = Mrequire(fpath.."/Types.LEF") --require(script.Parent.Types)
+--local Types = Mrequire(fpath.."/Types.LEF") --require(script.Parent.Types)
 local throwException = Mrequire(fpath.."/Debugging/Exceptions.LEF") --require(script.Parent.Debugging.Exceptions)
 local throwTypeError = Mrequire(fpath.."/Debugging/TypeErrors.LEF") --require(script.Parent.Debugging.TypeErrors)
 local RunService = Lime.GetService("RunService")
@@ -255,7 +255,7 @@ function Engine:Create(object, properties)
 			obj = properties.Object
 		end
 
-		local custom: Types.Custom = {
+		local custom = {
 			Vertices = {},
 			Edges = {}
 		}
@@ -446,7 +446,7 @@ function Engine:GetConstraintById(id)
 	return
 end
 
-function Engine:GetDebugInfo() : Types.DebugInfo
+function Engine:GetDebugInfo()
 	return {
 		Objects = {
 			RigidBodies = #self.bodies,
