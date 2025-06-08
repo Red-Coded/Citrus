@@ -26,7 +26,7 @@ local throwException = Mrequire(fpath.."/Debugging/Exceptions.LEF") --require(sc
 local throwTypeError = Mrequire(fpath.."/Debugging/TypeErrors.LEF") --require(script.Parent.Debugging.TypeErrors)
 local RunService = Lime.GetService("RunService")
 
-local function SearchTable(t: { any }, a: any,  lambda: (a: any, b: any) -> boolean) : any
+local function SearchTable(t, a,  lambda)
 	for _, v in ipairs(t) do
 		if lambda(a, v) then
 			return v
