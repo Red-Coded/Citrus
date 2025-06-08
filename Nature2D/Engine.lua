@@ -106,10 +106,10 @@ function Engine:Start()
 	local connection;
 	connection = RunService.RenderStepped:Connect(function(deltaTime)
 		if self.independent then
-			accumulator += deltaTime
+			accumulator = accumulator + deltaTime
 
 			while accumulator > 0 do
-				accumulator -= fixedDeltaTime
+				accumulator = accumulator - fixedDeltaTime
 				PhysicsRunner.Update(self, deltaTime)
 				PhysicsRunner.Render(self)
 			end
