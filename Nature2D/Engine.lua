@@ -6,7 +6,7 @@ local FileSystem = loadlib("FileSystem")
 local ApplicationHandler = loadlib("ApplicationHandler")
 local fpath = "C:/Nature2D"
 
-local function Mrequire(path: string?)
+local function Mrequire(path)
 	local LEFData = FileSystem.GetFile(path).Data
 
 	local module = ApplicationHandler.ExecuteLEFOutput(LEFData, path)
@@ -40,7 +40,7 @@ local Engine = {}
 Engine.__index = Engine
 
 -- This method is used to initialize basic configurations of the engine and allocate memory for future tasks.
-function Engine.init(screengui: Instance)
+function Engine.init(screengui)
 	if not typeof(screengui) == "Instance" or not screengui:IsA("Instance") then
 		error("Invalid Argument #1. 'screengui' must be a ScreenGui.", 2)
 	end
@@ -140,7 +140,7 @@ function Engine:Stop()
 end
 
 -- This method is used to create RigidBodies, Constraints and Points
-function Engine:Create(object: string, properties: Types.Properties)
+function Engine:Create(object, properties)
 	-- Validate types of the object and property table
 	throwTypeError("object", object, 1, "string")
 	throwTypeError("properties", properties, 2, "table")
@@ -358,7 +358,7 @@ end
 
 -- This function is used to initialize boundaries to which all bodies and constraints obey.
 -- An object cannot go past this boundary.
-function Engine:CreateCanvas(topLeft: Vector2, size: Vector2, frame: Frame)
+function Engine:CreateCanvas(topLeft, size, frame)
 	throwTypeError("topLeft", topLeft, 1, "Vector2")
 	throwTypeError("size", size, 2, "Vector2")
 
@@ -372,13 +372,13 @@ end
 
 -- This method is used to determine the simulation speed of the engine.
 -- By default the simulation speed is set to 55.
-function Engine:SetSimulationSpeed(speed: number)
+function Engine:SetSimulationSpeed(speed)
 	throwTypeError("speed", speed, 1, "number")
 	self.speed = speed
 end
 
 -- This method is used to configure universal physical properties possessed by all rigid bodies and constraints.
-function Engine:SetPhysicalProperty(property: string, value: Vector2 | number)
+function Engine:SetPhysicalProperty(property, value)
 	throwTypeError("property", property, 1, "string")
 
 	local properties = Globals.properties
@@ -434,7 +434,7 @@ function Engine:GetBodyById(id: string)
 end
 
 -- This method is used to fetch an individual constraint body from its ID.
-function Engine:GetConstraintById(id: string)
+function Engine:GetConstraintById(id)
 	throwTypeError("id", id, 1, "string")
 
 	for _, c in ipairs(self.constraints) do
@@ -475,24 +475,24 @@ end
 
 -- Determines if Quadtrees will be used in collision deteWction.
 -- By default this is set to false
-function Engine:UseQuadtrees(use: boolean)
+function Engine:UseQuadtrees(use)
 	throwTypeError("useQuadtrees", use, 1, "boolean")
 	self.quadtrees = use
 end
 
 -- Determines if Frame rate does not affect the simulation speed.
 -- By default set to true.
-function Engine:FrameRateIndependent(independent: boolean)
+function Engine:FrameRateIndependent(independent)
 	throwTypeError("independent", independent, 1, "boolean")
 	self.independent = independent
 end
 
-function Engine:SetConstraintIterations(iterations: number)
+function Engine:SetConstraintIterations(iterations)
 	throwTypeError("iterations", iterations, 1, "number")
 	self.iterations.constraint = math.floor(math.clamp(iterations, 1, 10))
 end
 
-function Engine:SetCollisionIterations(iterations: number)
+function Engine:SetCollisionIterations(iterations)
 	throwTypeError("iterations", iterations, 1, "number")
 
 	if self.quadtrees then
