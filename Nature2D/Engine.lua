@@ -421,7 +421,7 @@ function Engine:SetPhysicalProperty(property, value)
 end
 
 -- This method is used to fetch an individual rigid body from its ID.
-function Engine:GetBodyById(id: string)
+function Engine:GetBodyById(id)
 	throwTypeError("id", id, 1, "string")
 
 	for _, b in ipairs(self.bodies) do
